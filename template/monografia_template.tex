@@ -63,7 +63,7 @@
 % Opções de listing usados para o código fonte
 % Ref: http://en.wikibooks.org/wiki/LaTeX/Packages/Listings
 \lstset{ %
-language=Java,                  % choose the language of the code
+language=Ruby,                  % choose the language of the code
 basicstyle=\footnotesize,       % the size of the fonts that are used for the code
 numbers=left,                   % where to put the line-numbers
 numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
@@ -113,18 +113,18 @@ framexrightmargin=10pt
 
 
     \vspace*{3cm}
-    \Large{Nome completo do Autor}
+    \Large{André Luiz Abdalla Silveira}
     
 
     \vspace{3cm}
-    \textbf{\Large{Título da monografia \\
-    se for longo ocupa esta linha também}}
+    \textbf{\Large{Ficção Interativa: \\
+        levando diversão e culura além do código}}
     
        
     \vskip 5cm
     \normalsize{São Paulo}
 
-    \normalsize{Dezembro de 2015}
+    \normalsize{Novembro de 2018}
 \end{center}
 
 % ---------------------------------------------------------------------------- %
@@ -134,8 +134,8 @@ framexrightmargin=10pt
 \thispagestyle{empty}
     \begin{center}
         \vspace*{2.3 cm}
-        \textbf{\Large{Título da monografia \\
-    se for longo ocupa esta linha também}}
+        \textbf{\Large{Ficção Interativa: \\
+            levando diversão e culura além do código}}
         \vspace*{2 cm}
     \end{center}
 
@@ -149,13 +149,12 @@ framexrightmargin=10pt
     \vskip 5cm
 
     \begin{center}
-    Supervisor: Prof. Dr. Nome do Supervisor\\
-    $[$ Cosupervisor: Prof. Dr. Nome do Cosupervisor $]$
+    Supervisor: Prof. Dr. Marco Dimas Gubitoso
 
     \vskip 5cm
     \normalsize{São Paulo}
 
-    \normalsize{Dezembro de 2015}
+    \normalsize{Novembro de 2018}
     \end{center}
 \pagebreak
 
@@ -179,24 +178,30 @@ framexrightmargin=10pt
 % Resumo
 \chapter*{Resumo}
 
-Elemento obrigatório, constituído de uma sequência de frases concisas e
-objetivas, em forma de texto.  Deve apresentar os objetivos, métodos empregados,
-resultados e conclusões.  O resumo deve ser redigido em parágrafo único, conter
-no máximo 500 palavras e ser seguido dos termos representativos do conteúdo do
-trabalho (palavras-chave).
+Este trabalho se trata da implementação de um software que, a partir de uma entrada em linguagem
+natural, (em Português, mas podendo ser expandida em futuras iterações) e gera um jogo onde
+tudo que é necessário é leitura, imaginação e um computador. 
+
+Tal programa será desenvolvido em Ruby \footnote{assim como seus testes que usam RSpec}, dado a
+praticidade ao lidar com expressões rugulares e interpretadores de texto, indispensáveis para
+essa 'aventura'
 \\
 
-\noindent \textbf{Palavras-chave:} palavra-chave1, palavra-chave2, palavra-chave3.
+\noindent \textbf{Palavras-chave:} ruby, ficcao-interetiva, rspec
 
 % ---------------------------------------------------------------------------- %
 % Abstract
 \chapter*{Abstract}
 
-Elemento obrigatório, elaborado com as mesmas características do resumo em
-língua portuguesa.
+This paper is about a software implementation. Its job is processing natural language, (in Portuguese
+at first, but it can be expanded on future itarations) and return a game where everything you need is
+reading, imagination and your computer.
+
+This program will be written in Ruby \footnote{such as its tests that use RSpec}, because of the practicality
+on handling with regular expressions and text interpreters, which are crucial for this 'adventure'
 \\
 
-\noindent \textbf{Keywords:} keyword1, keyword2, keyword3.
+\noindent \textbf{Keywords:} ruby, interactive-ficction, rspec.
 
 
 % ---------------------------------------------------------------------------- %
