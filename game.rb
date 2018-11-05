@@ -1,3 +1,7 @@
+class Element
+
+end
+#@bancodobrasil
 class Rooms
   attr_accessor :name,
   def initialize (name)
