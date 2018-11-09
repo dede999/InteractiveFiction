@@ -9,6 +9,6 @@ describe Games do
 
   it 'should do something' do
 
-    true.should == false
+    "false".should == false
   end
 end
