@@ -22,56 +22,69 @@ da computação, não posso me arrogar a autoridade de dizer o que é ou não be
 acredito que trazer a interatividade dos jogos para leitura pode ter um potencial para incentivar o hábito
 da leitura.
 
+% Para mais detalhes, fica disponível neste \href{linux.ime.usp.br/\~andreluizas}{\textbf{link}} mais
+
 
 \section{Objetivos Específicos}
 \label{sec:goals}
 
 Aqui tratarei de todos os objetivos de forma específica e como pretendo cumpri-los.
 
-\textbf{Gerar divertimento}. O público desse software não é homogêneo. Tratam-se de pessoas criativas, mas não
-exatamente familiarizados com a tarefa de gerar código; mas também de quem for entrar nessas aventuras.
+\textbf{Gerar divertimento para o público} desse software. Este público não é homogêneo, e engloba
+pessoas criativas, mas não exatamente familiarizados com a tarefa de gerar código. Além desse grupo,
+há também aqueles que irão se divertir com as aventuras criadas.
 
-Para o desenvolvedor, o atrativo será criar jogos de uma forma que deverá ser a mais intuitiva   
+Para o desenvolvedor, o atrativo será criar jogos de uma forma que deverá ser a mais intuitiva possível.
+Para tal, inspirei-me no estilo de programar do \emph{RSpec}, e também na forma de estruturar os elementos
+do \emph{ZIL}. A ideia é trabalhar com blocos descritivos com tokens de começo e fim (que torne esses
+elementos o mais explícitos possível) e no meio destes somente pares de chaves e seus respectivos valores.
+
+Para o jogador é crucial resguardar a experiência de jogo de clássicos como as que se obtem na série de
+aventuras de texto \emph{Zork} \citep{Zork}. Uma ideia lançada pelo orientador permitira que se inserissem
+sons e planos de fundo ou imagens. É uma boa adição ao sistema, mas não é a prioridade.
+
+\textbf{Compartilhar conhecimento.} É fundamental que tudo o que for produzido nessa matéria fique disponível
+para que mais pessoas possam ter acesso a esse material, e que também possam contribuir no melhoramento do
+que estiver pronto, bem como na geração de novas \emph{features}.
+
+\textbf{Produzir uma \emph{gem}.} Seria uma forma de facilitar ainda mais a vida do usuário, ainda que este tipo
+específico esteja mais a vontade
 
 \section{Metodologia}
 \label{sec:methodology}
 
+A metodologia seguida nesse trabalho consiste de alguns passos: \begin{enumerate}
+  \item Leitura de textos sobre o assunto e conversa com o orientador.
+  \item Planejamento da estrutura do sistema.
+  \item Implementação do sistema
+  \item Documentação do processo e descrição de tudo o que tange o item anterior
+  \item Se possível, criar uma documentação suficiente para a compreensão e utilização dessa ferramenta
+\end{enumerate}
+
+O item 1 foi o pontepé inicial dessa empreitada. Graças a meu orientador, grande fã de ficção interativa, não tive
+grandes problemas para me interar a respeito desse assunto. Meu maior desafio foi aprender uma linguagem para que
+eu pudesse ter uma ideia do estado da arte e ter um parâmetro pra criar as ferramentas. Entretanto, ao ler o livro
+\citet{Zil:95} indicado pelo professor, percebi que ela era bem parecida com LISP, que já era conhecida da matéria
+"Conceitos de linguagens de programação".
+
+O passo 2 consiste na esquematização dos arquivos a serem criados. É fundamentalpara o planejamento do fluxo de
+trabalho a ser processado em tempo de execução.
+
+Os passos 3 e 4 acontecem nessa fase final, e acontecem de forma quase paralela. Tratam-se do coração da proposta feita
+meses antes. O passo 5 é decorrente de todos os anteriores e ficará pronto depois de pronto o software.
+
 \section{Descrição dos capítulos}
 \label{sec:description}
-%Uma monografia deve ter um capï¿½tulo inicial que ï¿½ a Introduï¿½ï¿½o e um
-%capï¿½tulo final que ï¿½ a Conclusï¿½o. Entre esses dois capï¿½tulos poderï¿½
-%ter uma sequï¿½ncia de capï¿½tulos que descrevem o trabalho em detalhes.
-%Apï¿½s o capï¿½tulo de conclusï¿½o, poderï¿½ ter apï¿½ndices e ao final deverï¿½
-%ter as referï¿½ncias bibliogrï¿½ficas.
-%
-%
-%Para a escrita de textos em Ciï¿½ncia da Computaï¿½ï¿½o, o livro de Justin Zobel,
-%\emph{Writing for Computer Science} \citep{zobel:04} ï¿½ uma leitura obrigatï¿½ria.
-%O livro \emph{Metodologia de Pesquisa para Ciï¿½ncia da Computaï¿½ï¿½o} de
-%\citet{waz:09} tambÃ©m merece uma boa lida.
-%
-%O uso desnecessï¿½rio de termos em lingua estrangeira deve ser evitado. No entanto,
-%quando isso for necessï¿½rio, os termos devem aparecer \emph{em itï¿½lico}.
-%
-%\begin{small}
-%\begin{verbatim}
-%Modos de citaï¿½ï¿½o:
-%indesejï¿½vel: [AF83] introduziu o algoritmo ï¿½timo.
-%indesejï¿½vel: (Andrew e Foster, 1983) introduziram o algoritmo ï¿½timo.
-%certo : Andrew e Foster introduziram o algoritmo ï¿½timo [AF83].
-%certo : Andrew e Foster introduziram o algoritmo ï¿½timo (Andrew e Foster, 1983).
-%certo : Andrew e Foster (1983) introduziram o algoritmo ï¿½timo.
-%\end{verbatim}
-%\end{small}
-%
-%Uma prï¿½tica recomendï¿½vel na escrita de textos ï¿½ descrever as legendas das
-%figuras e tabelas em forma auto-contida: as legendas devem ser razoavelmente
-%completas, de modo que o leitor possa entender a figura sem ler o texto onde a
-%figura ou tabela ï¿½ citada.
-%
-%Apresentar os resultados de forma simples, clara e completa ï¿½ uma tarefa que
-%requer inspiraï¿½ï¿½o. Nesse sentido, o livro de \citet{tufte01:visualDisplay},
-%\emph{The Visual Display of Quantitative Information}, serve de ajuda na
-%criaï¿½ï¿½o de figuras que permitam entender e interpretar dados/resultados de forma
-%eficiente.
-%
+
+O capítulo 2, \textbf{dos conceitos principais} funciona como um cabeçalho de um programa. Tal comparação ocorre,
+pois nessa parte do código é onde ficam os comandos de importação de bibliotecas. Analogamente, no próximo capítulo,
+tratar-se-ão de conceitos relativos ao material a ser implementado, e do jargão a ser utilizado. Detalhes a serem
+esclarecidos para que o cérebro do leitor "compile", ou seja, compreenda, o conteúdo das páginas que se seguirão.
+
+No capítulo 3, \textbf{do estado da arte}, tratarei brevemente de outras formas de desenvolver Aventuras de Texto,
+comparando-as entre si e o que pretende-se criar neste projeto.
+
+No capítulo 4, \textbf{da proposta}, tratar-se-á de detalhes técnicos sobre a implementação. Soluções, partes do
+problema entre outros fatores cruciais pra que seja compreensível para o leitor como funciona o sistema de forma geral.
+
+No capítulo 5, \textbf{dos resultados obtidos}, encontra-se

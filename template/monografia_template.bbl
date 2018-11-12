@@ -1,0 +1,20 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Zor(1980)]{Zork}{\bf Zor(1980)}
+Infocom games - zork i.
+\newblock \url{http://www.infocom-if.org/games/zork1/zork1.html}, 1980.
+\newblock Visitado em 11-11-2018. O ano de 1980 marca o lançamento do jogo, e
+  não da página.   {\scriptsize Citado na p\'{a}g.}
+
+\bibitem[Unkown(1995)]{Zil:95}{\bf Unkown(1995)}
+Unkown.
+\newblock \emph{Learning ZIL - or - Everything You Always Wanted to Know About
+  Writing Interactive Fiction But Couldn't Find Anyone Still Working Here to
+  Ask}.   {\scriptsize Citado na p\'{a}g.}
+
+\end{thebibliography}

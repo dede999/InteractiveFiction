@@ -1,7 +1,7 @@
-# 
-# makefile para a compilação do documento
 #
-# Sáb Jun 23 21:13:37 BRT 2007
+# makefile para a compilaï¿½ï¿½o do documento
+#
+# Sï¿½b Jun 23 21:13:37 BRT 2007
 #
 
 BASE_NAME = monografia_template
@@ -14,19 +14,19 @@ MAKEINDEX = makeindex
 pdf: $(BASE_NAME).pdf
 ps: $(BASE_NAME).ps
 
-$(BASE_NAME).pdf: $(BASE_NAME).tex 
+$(BASE_NAME).pdf: $(BASE_NAME).tex
 	$(PDFLATEX) $<
-	$(BIBTEX) $(BASE_NAME) 
-	$(MAKEINDEX) $(BASE_NAME) 
-	$(PDFLATEX) $< 
+	$(BIBTEX) $(BASE_NAME)
+	$(MAKEINDEX) $(BASE_NAME)
+	$(PDFLATEX) $<
 	$(PDFLATEX) $<
 	$(PDFLATEX) $<
 
-$(BASE_NAME).ps: $(BASE_NAME).tex 
+$(BASE_NAME).ps: $(BASE_NAME).tex
 	$(LATEX) $<
-	$(BIBTEX) $(BASE_NAME) 
-	$(MAKEINDEX) $(BASE_NAME) 
-	$(LATEX) $< 
+	$(BIBTEX) $(BASE_NAME)
+	$(MAKEINDEX) $(BASE_NAME)
+	$(LATEX) $<
 	$(LATEX) $<
 	$(LATEX) $<
 
@@ -35,3 +35,7 @@ clean:
 	      *.aux *.blg *.toc *.brf *.ilg *.ind \
 	      missfont.log $(BASE_NAME)*.bbl $(BASE_NAME)*.pdf $(BASE_NAME)*.out \
 		  $(BASE_NAME)*.lof $(BASE_NAME)*.lot $(BASE_NAME)*.idx
+
+new:
+	make clean
+	make

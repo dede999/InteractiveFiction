@@ -87,6 +87,7 @@ xrightmargin=10pt,
 framexleftmargin=10pt,
 framexrightmargin=10pt
 }
+\newcommand{\codigo}[5]{\lstinputlisting[firstline={#1},lastline={#2}, caption={#3}, label={#4}]{#5}}
 
 % ---------------------------------------------------------------------------- %
 % Corpo do texto
@@ -170,8 +171,8 @@ framexrightmargin=10pt
     Meus agradecimentos pricipais são a Deus, meus adorados pais que me proporcianram
     as melhores oportunidades que eu poderia ter. Meu agradecimento também dirige-se
     ao meu orientador que me apoiou nos momentos inicais do meu trabalho, e também me
-    motivou bastante em momentos em que eu não estava exatamente disposto a seguir
-    com esse trabalho.
+    ajudou bastante em momentos em que eu não sabia exatamente o que fazer nessa
+    matéria, e que me deu essa ideia de trabalho.
 
 
 
@@ -251,10 +252,12 @@ framexrightmargin=10pt
     %\onehalfspacing            % espaÃ§amento um e meio
 
 
-    \input cap-introducao        % associado ao arquivo: 'cap-introducao.tex'
-    \input cap-conceitos        % associado ao arquivo: 'cap-introducao.tex'
-    \input cap-desenvolvimentos  % associado ao arquivo: 'cap-desenvolvimento.tex'
-    \input cap-conclusoes        % associado ao arquivo: 'cap-conclusoes.tex'
+    \input cap-introducao
+    \input cap-conceitos
+    \input cap-estado_arte
+    \input cap-proposta
+    \input cap-resultados
+    \input cap-conclusoes
 
     % cabeÃ§alho para os apÃªndices
     \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\appendixname\ \thechapter}} {\MakeUppercase{#1}} }
