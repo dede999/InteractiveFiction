@@ -4,5 +4,31 @@
 \section{Qual é a proposta?}
 \label{sec:what_is}
 
+A proposta desse trabalho não é complexa. Trata-se da criação de linguagem de domínio específico (DSL em inglês).
+Com essa linguagem estruturada, nossa meta é desenvolver o compilador que interpretará seus comandos, alocando as estruturas
+de os dados necesários para a execução. Esses dados ficam na máquina até o jogo acabar. Depois disso, os dados são descartados ficando
+apenas o script do jogo. É o que se propõe para a entrega final \footnote{vide figura \ref{fig:project}}. Isso não significa, entretanto, que o trabalho deva ficar parado aí. Pelo contrário, deseja-se criar uma cadeia de processamento que acredito ser melhor como explicado na sessão \ref{sec:what-can-be-done}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=8.5cm]{figuras/project}
+  \caption{\label{fig:project} Como funciona o programa.}
+\end{figure}
+
+
 \section{Como funciona?}
 \label{sec:how-it-works}
+
+Nessa parte do capítulo, fica a explicação de como funciona o software global e localmente. Primeiro, os arquivos serão explicados dentro de suas funções. Por último, fica a descrição de como se encaixam para o funcionamento geral.
+
+\subsection{Arquivos}
+\label{subsec:files}
+
+\begin{itemize}
+  \item \texttt{\textbf{game.rb}}\footnote{único a existir na data da entrega}: esse arquivo é responsável pela metaprogramação. Ou seja, por programar os eventos, alocar dados e suas estruturas de forma que o jogo se processe da melhor forma. Contém classes referentes aos personagens, eventos, objetos e ambientes.
+  \item \texttt{\textbf{run.rb}}: responsável por executar o jogo. Cabe decisão se este arquivo abrigará um módulo (mais provável) ou uma classe. Mas é certo que a programação nele contida será dirigida para fazer o jogo funcionar, isto é, passar turnos, alterar inventário, mover o jogador e objetos e demais eventos.
+  \item \texttt{\textbf{parser.rb}}: responsável por interpretar o arquivo de jogo. Aqui entra em ação uma das melhores particularidades do Ruby\footnote{no contexto desse trabalho, como citado na sessão \ref{sec:ruby}}: a sua praticidade em trabalhar com texto. Esse arquivo interpretará as entradas do jogador também.
+\end{itemize}
+
+\subsection{Como trabalham}
+\label{subsec:how-they-work}
