@@ -4,10 +4,16 @@
 \section{Qual é a proposta?}
 \label{sec:what_is}
 
-A proposta desse trabalho não é complexa. Trata-se da criação de linguagem de domínio específico (DSL em inglês).
-Com essa linguagem estruturada, nossa meta é desenvolver o compilador que interpretará seus comandos, alocando as estruturas
-de os dados necesários para a execução. Esses dados ficam na máquina até o jogo acabar. Depois disso, os dados são descartados ficando
-apenas o script do jogo. É o que se propõe para a entrega final \footnote{vide figura \ref{fig:project}}. Isso não significa, entretanto, que o trabalho deva ficar parado aí. Pelo contrário, deseja-se criar uma cadeia de processamento que acredito ser melhor como explicado na sessão \ref{sec:what-can-be-done}
+A proposta desse trabalho não é complexa. Trata-se da criação de linguagem de
+domínio específico (DSL em inglês). Com essa linguagem estruturada, nossa meta é
+desenvolver o compilador que interpretará seus comandos, alocando as estruturas
+de dados necesárias para a execução do programa. Esses dados ficam na máquina
+até o jogo acabar. Depois disso, os dados são descartados ficando apenas o
+script do jogo. É o que se propõe para a entrega final \footnote{vide figura
+\ref{fig:project}}. Isso não significa, entretanto, que o trabalho deva ficar
+parado aí. Pelo contrário, deseja-se criar uma cadeia de processamento que
+acredito ser melhor do que a atual como explicado na sessão
+\ref{sec:what-can-be-done}
 
 \begin{figure}[htb]
   \centering
@@ -19,16 +25,91 @@ apenas o script do jogo. É o que se propõe para a entrega final \footnote{vide
 \section{Como funciona?}
 \label{sec:how-it-works}
 
-Nessa parte do capítulo, fica a explicação de como funciona o software global e localmente. Primeiro, os arquivos serão explicados dentro de suas funções. Por último, fica a descrição de como se encaixam para o funcionamento geral.
+Nessa parte do capítulo, fica a explicação de como funciona o software global e
+localmente. Primeiro, os arquivos serão explicados dentro de suas funções. Por
+último, fica a descrição de como se encaixam para o funcionamento geral.
 
 \subsection{Arquivos}
 \label{subsec:files}
 
 \begin{itemize}
-  \item \texttt{\textbf{game.rb}}\footnote{único a existir na data da entrega}: esse arquivo é responsável pela metaprogramação. Ou seja, por programar os eventos, alocar dados e suas estruturas de forma que o jogo se processe da melhor forma. Contém classes referentes aos personagens, eventos, objetos e ambientes.
-  \item \texttt{\textbf{run.rb}}: responsável por executar o jogo. Cabe decisão se este arquivo abrigará um módulo (mais provável) ou uma classe. Mas é certo que a programação nele contida será dirigida para fazer o jogo funcionar, isto é, passar turnos, alterar inventário, mover o jogador e objetos e demais eventos.
-  \item \texttt{\textbf{parser.rb}}: responsável por interpretar o arquivo de jogo. Aqui entra em ação uma das melhores particularidades do Ruby\footnote{no contexto desse trabalho, como citado na sessão \ref{sec:ruby}}: a sua praticidade em trabalhar com texto. Esse arquivo interpretará as entradas do jogador também.
+  \item \texttt{\textbf{game.rb}}: esse arquivo é responsável pela
+  metaprogramação. Ou seja, por programar a programação. Quer dizer que a sua
+  programação é a responsável por criar eventos, alocar dados e suas estruturas
+  de forma que o jogo se processe da melhor forma. Contém classes referentes aos
+  personagens, eventos, objetos e ambientes.
+  \item \texttt{\textbf{run.rb}}: responsável por executar o jogo. Cabe decisão
+  se este arquivo ficará em um módulo (mais provável) ou em uma classe. Mas é
+  certo que a programação nele contida será dirigida para fazer o jogo funcionar,
+  isto é, passar turnos, alterar inventário, mover o jogador e objetos e demais
+  eventos.
+  \item \texttt{\textbf{parser.rb}}: responsável por interpretar o arquivo de
+  jogo. Aqui entra em ação uma das melhores particularidades do Ruby
+  \footnote{no contexto desse trabalho, como citado na sessão \ref{sec:ruby}}: a
+  sua praticidade em trabalhar com texto. Esse arquivo interpretará as entradas
+  do jogador também.
+  \item \texttt{\textbf{start.rb}}: como diz o nome, é responsável por começar a
+  execução. Aciona os demais módulos e classes.
 \end{itemize}
 
 \subsection{Como trabalham}
 \label{subsec:how-they-work}
+
+O funcionamento do sistema acontece num fluxo linear e muito simples. Começa com
+a leitura do arquivo $\mathtt{*.fi}$\footnote{ficção interativa}, e acaba quando
+o jogador decide não jogar mais. Essa sessão existe para contar o que acontece,
+e como os arquivos trabalham entre si.
+
+O primeiro passo é o desenvolvedor gerando o arquivo com a descrição do seu jogo
+usando as regras a serem apresentadas no capítulo de resultados. Ainda que fosse
+muito desejável fazer uma linguagem mais próxima da natural, tal como
+\emph{Inform7}, é totalmente inviável dado não somente o tempo para conclusão
+(cerca de 1 ano), mas como o fato de que seria exigido um estudo muito mais
+profundo na área de desenvolvimento em linguagem natural. Em outras palavras, é
+desejável, mas não é viável.
+
+Depois disso, aciona-se \texttt{\textbf{start.rb}}. Ele funciona tal qual uma
+ignição ao acionar as demais partes do programa. A primeira dessas partes é o
+interpretador, o \texttt{\textbf{parser.rb}}. Esse módulo, num primeiro momento,
+compila o que o criador do jogo determina para o seu jogo. Conforme o arquivo
+base é lido, o parser procura reconhecer o elemento que o usuário vai incluir,
+costurando-os um a um, de maneira a dar vida à aventura planejada. Depois de
+compilar o jogo, o interpretador toma a responsabilidade de interpretar o que o
+jogador escreve, retornando para cada linha de comando, uma resposta ou uma ação.
+
+Isso é possível por causa do arquivo \texttt{\textbf{game.rb}}. Toda vez que o
+autor declarar que quer construir um elemento, o prgrama cria uma instância da
+estrutura respectiva. Conforme lê os atributos, o programa atribui a essa
+instância o valor determinado, se e somente se, a estrutura tiver esse atributo.
+Do contrário, uma mensagem de aviso é lançada, e aquela atribuição estranha
+é ignorada.
+
+Um ponto importante a levar em conta são o que posso chamar de "referências
+futuras". Isto é, nada impede o autor de dizer que a cozinha fica do lado da
+sala, ainda que um desses cômodos ainda não tenham sido declarado. Nesses casos,
+referências futuras serão armazenadas e deixadas para o momento depois da
+leitura. Momento no qual, hipoteticamente, todos os elementos do jogo estarão
+declarados. Entretanto, se ainda houver ambientes sem comunicação com o resto do
+jogo, ou elementos soltos, uma mensagem de aviso poderá sugir, mas estuda-se
+também perguntar ao autor do jogo se não deseja completar esses detealhes que
+ficaram pra trás.
+
+Terminada a compilação, o arquivo \texttt{\textbf{run.rb}} começa o seu trabalho.
+O jogo começa perguntando ao jogador se quer começar a aventura. Caso afirmativo,
+a história se inicia. Esse menu de jogo também apresenta opção de saída também,
+bem como de conhecer a sinopse do jogo e opções como a de criar um arquivo
+\footnote{com o desenvolvimento da narrativa} no computador ou não. Tal arquivo,
+além de servir como um troféu por ter vencido na história (quando acontecer),
+visa gerar no jogador a sensação de ter parte naquela história. Em última
+instância, que fique registrado o quanto o autor desse trabalho dejesa estimular
+nas pessoas o ímpeto de criar novas histórias, seja a partir dos seus passos no
+jogo, seja em \emph{fan-fics}\footnote{a grosso modo, trata-se de histórias
+criadas a partir de outras, por fãs  destas. Fica como sugestão de leitura,
+por lazer, as histórias criadas por fãs da célebre série da autora J. K. Rowling
+nesse
+\href{https://super.abril.com.br/blog/turma-do-fundao/5-fanfics-para-matar-a-saudade-de-harry-potter/}{\textbf{link}}},
+ou suas pŕoprias narrativas.
+
+No capítulo de resultados, encontra-se\footnote{depois do trabalho acabado} um
+tutorial de como usar a ferramenta, do que pode ser feito com ela, e o que mais
+poderá ser feito.
