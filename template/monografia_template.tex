@@ -31,7 +31,7 @@
 %\usepackage[bf,small,compact]{titlesec} % cabeÃ§alhos dos tÃ­tulos: menores e compactos
 \usepackage[fixlanguage]{babelbib}
 \usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
-\usepackage[usenames,svgnames,dvipsnames]{xcolor}
+\usepackage[usenames,svgnames,dvipsnames]{xcolor, colortbl}
 \usepackage[a4paper,top=2.54cm,bottom=2.0cm,left=2.0cm,right=2.54cm]{geometry} % margens
 %\usepackage[pdftex,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=black,linkcolor=black,urlcolor=black,filecolor=black,bookmarksopen=true]{hyperref} % links em preto
 \usepackage[pdftex,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=DarkGreen,linkcolor=NavyBlue,urlcolor=DarkRed,filecolor=green,bookmarksopen=true]{hyperref} % links coloridos
@@ -90,6 +90,8 @@ framexleftmargin=10pt,
 framexrightmargin=10pt
 }
 \newcommand{\codigo}[5]{\lstinputlisting[firstline={#1},lastline={#2}, caption={#3}, label={#4}]{#5}}
+\newcommand{\paragrafo}[1]{\textbf{\texttt{{#1}}}}
+\newcommand{\kw}[1]{\textbf{{#1}}}
 
 % ---------------------------------------------------------------------------- %
 % Corpo do texto
@@ -121,8 +123,8 @@ framexrightmargin=10pt
 
 
         \vspace{3cm}
-        \textbf{\Large{Ficção Interativa \\
-            levando diversão e cultura além do código}}
+        \textbf{\Large{RIF \\
+             -- Criando Ficção Interativa com Ruby --}}
 
 
         \vskip 5cm
@@ -137,8 +139,8 @@ framexrightmargin=10pt
     \thispagestyle{empty}
     \begin{center}
         \vspace*{2.3 cm}
-        \textbf{\Large{Ficção Interativa \\
-            levando diversão e cultura além do código}}
+        \textbf{\Large{RIF \\
+             -- Criando Ficção Interativa com Ruby --}}
         \vspace*{2 cm}
     \end{center}
 
@@ -183,13 +185,19 @@ framexrightmargin=10pt
     \chapter*{Resumo}
 
 
-    Este trabalho se trata da implementação de um software que, a partir de uma entrada em linguagem
-    natural, (em Português, mas podendo ser expandida em futuras iterações) e gera um jogo onde
-    tudo que é necessário é leitura, imaginação e um computador.
+    Este trabalho se trata da implementação de um software  chamado RIF(\textbf{
+    Ruby Interactive Fiction} que, a partir de uma entrada devidamente
+    estruturada, gera uma aventura de texto. A ideia é criar um programa que
+    promova um tipo diferente e divertido de entretenimento. O objetivo desse
+    trabalho é tão somente produzir a ferramenta. A qualidade da aventura, ou
+    seja, se a história é cativante ou divertida foje completamente do controle.
 
-    Tal programa será desenvolvido em Ruby \footnote{assim como seus testes que usam RSpec}, dado a
-    praticidade ao lidar com expressões rugulares e interpretadores de texto, indispensáveis para
-    essa 'aventura'
+    Como o próprio nome diz, tal programa é desenvolvido em Ruby \footnote{assim
+    como seus testes que usam RSpec, que se trata de um framework de testes},
+    dado a praticidade ao lidar com expressões rugulares e interpretadores de
+    texto, indispensáveis para essa 'aventura'. RIF não é um substituto de
+    Inform, ou TADS. RIF é uma \textit{gem}\footnote{algo como uma biblioteca
+    para a linguagem}, não um jogo em si.
     \\
 
 
@@ -199,13 +207,18 @@ framexrightmargin=10pt
     % Abstract
     \chapter*{Abstract}
 
+    This paper is about the implementation of a software called RIF \textbf{
+    Ruby Interactive Fiction}. RIF takes a structured input, and creates
+    Interactive Fiction from it. The point here is promoting a different kind
+    of entratainment. Don't take it wrong, RIF cannot assure the game is going
+    to be funny or anything else. It's completely out of its control.
 
-    This paper is about a software implementation. Its job is processing natural language, (in Portuguese
-    at first, but it can be expanded on future itarations) and return a game where everything you need is
-    reading, imagination and your computer.
-
-    This program will be written in Ruby \footnote{such as its tests that use RSpec}, because of the practicality
-    on handling with regular expressions and text interpreters, which are crucial for this 'adventure'
+    As its own name says, such software is written in Ruby, and so are tests
+    \footnote{that use RSpec, which is a Ruby framework for creating tests}. The
+    reason for that is because is easier to deal with regular expressions and
+    paresers, which are crucial for this \"adventure\". RIF is not a replacement
+    tool for Inform or TADS. RIF is written to be a \textit{gem}\footnote{that
+    is like a library for Ruby}, not a game itself
     \\
 
     \noindent \textbf{Keywords:} ruby, interactive-ficction, rspec.

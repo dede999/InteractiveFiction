@@ -26,8 +26,72 @@ acredito ser melhor do que a atual como explicado na sessão
 \label{sec:how-it-works}
 
 Nessa parte do capítulo, fica a explicação de como funciona o software global e
-localmente. Primeiro, os arquivos serão explicados dentro de suas funções. Por
+localmente. Primeiro, apresentam-se as gramáticas (para a criação e depois, para
+a execução). Depois, os arquivos serão explicados dentro de suas funções. Por
 último, fica a descrição de como se encaixam para o funcionamento geral.
+
+\subsection{As gramáticas}
+\label{subsec:grammar}
+
+\subsubsection{Para o parser}
+\label{subsubsec:parser}
+
+A gramática a ser seguida no interpretador do jogo é muito similar ao exemplo da
+figura \ref{fig:rspec}. Entretanto, considerando que esta apresenta outras
+influências e propriedades, é fundamental que seja apresentada.
+
+\paragrafo{Cabeçalho}: Parte capital da fonte do jogo, resposável por definir os
+metadados do jogo, como nome, autor(es), versão, e outros dados que se acreditar
+relevantes. Esses meta dados também podem ser encarados como variáveis globais,
+a serem mencionadas a frente, mas a diferença capital é que meta dados serão
+exibidos no início do jogo, antes mesmo da apresentação do menu.
+
+\vspace{1cm}
+
+\begin{tabular}{|l|}
+  \hline
+  \texttt{\kw{meta} autor = Josefino} \\
+  \texttt{\kw{meta} title = O jogo do Ano} \\
+  \texttt{\kw{meta} desc = O melhor jogo que você vai jogar nesse ano} \\
+  \quad \quad \quad \quad \texttt{ou talvez nos próximos 10 min} \\
+  \hline
+\end{tabular}
+
+\vspace{1cm}
+
+\paragrafo{Variáveis}: Definições de propriedades básicas do jogo (como a
+quantidade de pontos de vida, força, número do turno) e outras que o jogador vai
+criar. As variáveis podem ser de três tipos: \begin{description}
+  \item[\kw{meta}] -- Meta dados -- como mencionado acima, podem ser considerados
+  como variáveis globais, porque podem ser utilizadas como parâmetro e em
+  qualquer escopo. Entretanto, diferenciam-se das variáveis globais descritas
+  abaixo pois não podem ter seu valor alterado enquanto o jogo está sendo
+  executado
+  \item[\kw{var}] -- Variáveis globais -- Podem ser usadas em qualquer escopo, e
+  podem ter seu valor alterado em tempo de execução.
+  \item[\kw{let}] -- Variáveis de escopo (funções) --  válidas somente no escopo em que
+  estão definidas. Nada as impediria de ser usada em um escopo global, mas seu
+  uso é mais adequado dentro de funções e laços específicos. \footnote{perguntar
+  ao professor se é conveniente ou proveitoso fazer essa distinção.}
+\end{description}
+
+\paragrafo{Objetos}
+
+
+\paragrafo{Lugares}
+
+
+\paragrafo{Funções}
+
+
+\paragrafo{Eventos}
+
+
+\paragrafo{NPCs e demais personagens}
+
+
+\subsubsection{Para o jogo}
+\label{subsubsec:game}
 
 \subsection{Arquivos}
 \label{subsec:files}
