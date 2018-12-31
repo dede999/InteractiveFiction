@@ -1,5 +1,5 @@
+require 'game'
 require 'rspec'
-require 'character'
 
 describe 'Character Class' do
 

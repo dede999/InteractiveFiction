@@ -1,5 +1,5 @@
+require 'game'
 require 'rspec'
-require 'event'
 
 describe 'My behaviour' do
 

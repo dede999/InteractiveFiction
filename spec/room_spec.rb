@@ -1,4 +1,4 @@
-require 'room'
+require 'game'
 require 'rspec'
 
 describe 'My behaviour' do

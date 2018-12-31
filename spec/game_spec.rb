@@ -1,14 +1,31 @@
 require 'rspec'
 require 'game'
 
-describe Rooms do
+describe Element do
 
+  before(:each) do
+    att_hash = Hash.new
+    att_hash["word"] = "okay"
+    flag = {"on" => true }
+    @example = Element.new(
+        'test', att_hash, flag, '', '')
+  end
+
+  it 'should be able to change variables' do
+    @example.change_variables("word", "test")
+    expect(@example.attr["word"]).to eq("test")
+  end
+
+  it "should modify a flag value" do
+    @example.modify("on")
+    expect(@example.flags["on"]).to be false
+  end
 end
 
 describe Games do
 
-  it 'should do something' do
-
-    "false".should == false
+  before(:each) do
+    @example = Games.new('Zork')
   end
+
 end
