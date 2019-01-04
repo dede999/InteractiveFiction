@@ -10,8 +10,6 @@ describe Thing do
     @stuff = Thing.new("Test")
     @stuff.where = @room
     @stuff.active = false
-    # @game = Games.new("Teste",
-    #                   "", "", "")
   end
 
   it "could not be moved to some locked room" do
