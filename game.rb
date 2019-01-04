@@ -79,10 +79,6 @@ class Rooms < Element
 
   end
 
-  def walk to
-
-  end
-
   def look_around
     ""
   end
@@ -106,14 +102,18 @@ class Thing < Element
   end
 
   def move_stuff(to = self.where)
-    to
+    ""
   end
 
   def activate yes
 
   end
 
-  def meth
+  def use
+
+  end
+
+  def repair rr
 
   end
 

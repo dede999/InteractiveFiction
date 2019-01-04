@@ -21,8 +21,6 @@ describe Rooms do
       expect(around).to eq("Mesa, Luminária, Cadeira")
   end
 
-  # it "should not go to a locked room" do
-  # end
   it "should be able to unlock" do
     @north.lock false
     expect(@north.is_locked).to be false
