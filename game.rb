@@ -24,8 +24,8 @@ class Games < Element
   attr_accessor :events, :turns, :success, :begun, :historic
   attr_reader :intro, :authors, :version
 
-  def initilize(nome, intro, authors="", version, attr)
-    super(nome, attr)
+  def initialize(nome, intro, authors="", version)
+    @name = nome
     @intro = intro
     @authors = authors.split(",")
     @version = version
@@ -34,6 +34,7 @@ class Games < Element
     @success = false
     @begun = false
     @historic = []
+    @meta = Hash.new{}
   end
 
   def start
@@ -44,56 +45,75 @@ class Games < Element
 
   end
 
-  def prompt
+  def schedule_tasks
 
   end
 
-  def end_game
+  def pop_task
 
   end
+
+  def end_game(win=true)
+
+  end
+
 end
 
 class Rooms < Element
-  attr_accessor :name, :north, :east, :west, :south, :flags, :stuff_there, :is_locked
+  attr_accessor :name, :north, :east, :west, :south,
+                :flags, :stuff_there, :is_locked
 
-  def initialize (n, s, w, e, locked = false)
-    super
-    @north = n
-    @south = s
-    @west = w
-    @east = e
+  def initialize (name)
+    @name = name
+    @desc = ""
+    @flags = Hash.new{}
+    @north = nil
+    @south = nil
+    @west = nil
+    @east = nil
     @stuff_there = []
-    @is_locked = locked
+    @is_locked = false
   end
 
-  def lock
+  def lock var
 
   end
 
-  def unlock
+  def walk to
 
+  end
+
+  def look_around
+    ""
   end
 end
 
 class Thing < Element
+  attr_accessor :where, :desc, :short, :attr, :flags,
+                :quantity, :endure, :active
+  attr_reader :name
 
-  def initilize(nome, where, flags, attr, quantity, desc, short, endurance, on = true )
-    super
-    @where = where
-    @quantity = quantity
-    @endure = endurance
-    @active = on
+  def initialize(nome)
+    @name = nome
+    @where = nil
+    @desc = ""
+    @short = ""
+    @attr = Hash.new{}
+    @flags = Hash.new{}
+    @quantity = 1
+    @endure = 10 # number of turns 'til it breaks
+    @active = true
   end
 
   def move_stuff(to = self.where)
     to
   end
 
-  def activate
+  def activate yes
 
   end
 
-  def deactivate
+  def meth
 
   end
 
@@ -149,15 +169,17 @@ class Character < Element
 end
 
 class Event < Element
+  attr_accessor :moment, :local, :proc, :trigger, :done
+  attr_reader :name, :desc
 
-  def initialize (vars, proc, moment, trigger)
-    # @name = name
-    # @desc = desc
-    super
-    @attr = vars
-    @proc = proc
-    @moment = moment
-    @trigger = trigger
+  def initialize (name="", desc="")
+    @name = name
+    @desc = desc
+    @local = Hash.new{} # local variables
+    @proc = Proc.new{}
+    @moment = -1
+    @trigger = Proc.new{}
+    @done = false
   end
 
   def make_it_happen
