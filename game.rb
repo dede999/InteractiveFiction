@@ -21,8 +21,10 @@ class Element
 end
 
 class Games < Element
-  attr_accessor :events, :turns, :success, :begun, :historic
+  attr_accessor :events, :turns, :success, :begun,
+                :historic, :characters
   attr_reader :intro, :authors, :version
+  @@characters = []
 
   def initialize(nome, intro, authors="", version)
     @name = nome
@@ -54,6 +56,10 @@ class Games < Element
   end
 
   def end_game(win=true)
+
+  end
+
+  def has_a_main
 
   end
 
@@ -120,38 +126,37 @@ class Thing < Element
 end
 
 class Character < Element
-  @@there_is_main = false
+  attr_accessor :desc, :short_desc, :attr, :where,
+                :inventory, :protagonist, :hp, :sp,
+                :coins
+  attr_reader :name
 
-  def initializer(name, where, desc, short, attr, inv, is_protagonist = false , health = 100, strength = 0, money = 0)
-    # @name = name
-    # @desc = desc
-    # @short_desc = short
-    # @attr = attr
-    super
+  def initializer(name, where)
+    @name = name
+    @desc = ""
+    @short_desc = ""
+    @attr = Hash.new{}
     @where = where
-    @inventory = inv
-    @protagonist = is_protagonist
-    @hp = health
-    @sp = strength
-    @coins = money
-    if is_protagonist and not @@there_is_main
-      @@there_is_main = true
-    end
+    @inventory = []
+    @protagonist = false
+    @hp = 100
+    @sp = 0
+    @coins = 0
+    Games.characters << self
   end
 
-  def is_there_any_main
-    @@there_is_main
-  end
+  # def is_there_any_main
+  # end
 
-  def life_up_and_down(value, up=true)
+  def life_up_and_down(value, heal=true)
 
   end
 
-  def strength_up_and_down(value, up=true)
+  def strength_up_and_down(value, heat_up=true)
 
   end
 
-  def money_up_and_down(value, up=true)
+  def money_up_and_down(value, income=true)
 
   end
 
@@ -159,11 +164,7 @@ class Character < Element
 
   end
 
-  def object_in_and_out(thing, qtt = 1)
-
-  end
-
-  def set_flag(title, to_state = 0)
+  def object_in_and_out(thing, get = 1)
 
   end
 end

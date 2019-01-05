@@ -7,8 +7,9 @@ describe Element do
     att_hash = Hash.new
     att_hash["word"] = "okay"
     flag = {"on" => true }
-    @example = Element.new(
-        'test', att_hash, flag, '', '')
+    @example = Element.new('test')
+    @example.attr = att_hash
+    @example.flags = flag
   end
 
   it 'should be able to change variables' do

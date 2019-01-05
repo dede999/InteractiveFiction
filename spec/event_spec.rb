@@ -1,7 +1,7 @@
 require 'game'
 require 'rspec'
 
-describe 'My behaviour' do
+describe Event do
 
   it 'should do something' do
 

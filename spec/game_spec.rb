@@ -15,8 +15,13 @@ describe Games do
     @game.events = [e1, e2, e3]
     @game.begun = false
     @game.historic = ['Be happy']
-    # allow(@game).to receive(:turns) {4}
-    # allow(@game).to receive(:events) {[e1, e2, e3]}
+    @game.characters << Character.new("Watt", Rooms.new("t1"))
+    @game.characters << Character.new("Lewis", Rooms.new("t2"))
+    @game.characters[1].protagonist = true
+  end
+
+  it "should say if the game has a main character" do
+    expect(@game.has_a_main).to be true
   end
 
   it "should set 'begun' game attribute true" do
@@ -64,9 +69,15 @@ describe Games do
 
   it "should end the game with a loss" do
     @game.start
-    @game.end_game false
+    @game.end_game false # game ends with a loss
     expect(@game.begun).to be false
     expect(@game.success).to be false
+  end
+
+  it "should not start without a main character" do
+    @game.characters[1].protagonist = false
+    var = @game.start
+    expect(var).to be false
   end
 
 end
