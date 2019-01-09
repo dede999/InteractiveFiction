@@ -20,7 +20,7 @@ describe Thing do
   it "could be moved to some unlocked room" do
     @room.south.lock false
     @stuff.move_stuff @room.south
-    expect(@stuff.where).to eq(@room.south)
+    expect(@stuff.where).to be(@room.south)
   end
 
   it "should not be worn if it's inactive" do
@@ -58,4 +58,6 @@ describe Thing do
     aft = @stuff.endure
     expect(aft - bef).to be 10
   end
+
+
 end

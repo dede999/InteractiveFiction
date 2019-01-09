@@ -2,7 +2,7 @@ class Element
   attr_accessor :attr, :flags, :desc, :short
   attr_reader :nome
 
-  def initialize(nome, attr = Hash.new{}, flags = Hash.new{}, desc, short)
+  def initialize(nome, attr = Hash.new{}, flags = Hash.new{}, desc = "", short = "")
     @name = nome
     @attr = attr
     @flags = flags
