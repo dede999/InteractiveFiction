@@ -12,13 +12,15 @@ describe Element do
     @example.flags = flag
   end
 
-  it 'should be able to change variables' do
-    @example.change_variables("word", "test")
-    expect(@example.attr["word"]).to eq("test")
-  end
+  context "when testing basic methods" do
+    it 'should be able to change variables' do
+      @example.change_variables("word", "test")
+      expect(@example.attr["word"]).to eq("test")
+    end
 
-  it "should modify a flag value" do
-    @example.modify("on")
-    expect(@example.flags["on"]).to be false
+    it "should modify a flag value" do
+      @example.modify("on")
+      expect(@example.flags["on"]).to be false
+    end
   end
 end

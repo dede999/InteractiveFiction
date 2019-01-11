@@ -39,6 +39,14 @@ class Games < Element
     @meta = Hash.new{}
   end
 
+  def characters
+    @@characters
+  end
+
+  def self.characters
+    @@characters
+  end
+
   def start
 
   end
@@ -170,20 +178,28 @@ class Character < Element
 end
 
 class Event < Element
-  attr_accessor :moment, :local, :proc, :trigger, :done
-  attr_reader :name, :desc
+  attr_accessor :moment, :local, :proc, :cond,
+                :done, :desc, :par, :lamb, :locked
+  attr_reader :name
 
   def initialize (name="", desc="")
     @name = name
     @desc = desc
+    @par = 0
     @local = Hash.new{} # local variables
-    @proc = Proc.new{}
+    @locked = false
     @moment = -1
-    @trigger = Proc.new{}
+    @cond = ""
     @done = false
+    @lamb = ""
+    @proc = nil
   end
 
-  def make_it_happen
+  def create_procedure
+    0
+  end
+
+  def make_it_happen (*args)
     # execute procedure
   end
 
