@@ -40,7 +40,7 @@ describe Event do
       expect(var).to be false
     end
 
-    it "should rise an Argument Error" do
+    it "should rise an Argument Error if no argument given (if it needs any" do
       @event.cond = "lambda {return true}"
       expect(@event.make_it_happen).to raise(ArgumentError)
     end
