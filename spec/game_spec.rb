@@ -53,7 +53,7 @@ describe Games do
 
   it "should not remove any task at 1st turn" do
     ev =  @game.pop_task
-    expect(ev).to be_nil
+    expect(ev).to be false
   end
 
   it "should remove the first event at 2nd turn" do

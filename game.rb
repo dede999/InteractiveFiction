@@ -11,12 +11,15 @@ class Element
   end
 
   def change_variables (var, new_var)
-    # change attr hash
+    self.attr[var] = new_var
   end
 
   def modify flag
-    # make flag value the opposite
-    # flag hash values are boolean
+    if self.flags.has_key?(flag)
+      self.flags[flag] = !self.flags[flag]
+    else
+      self.flags[flag] = true
+    end 
   end
 end
 
@@ -48,27 +51,47 @@ class Games < Element
   end
 
   def start
-
+    var = false
+    for ch in Games.characters do
+      var = ch.protagonist
+      if var
+        break
+      end
+    end
+    unless var
+      return var
+    end
+    self.begun = true
+    self.success = false
+    self.historic = []
+    self.turns = 0
   end
 
   def new_turn
-
+    self.turns += 1
+    poped = self.pop_task()
   end
 
   def schedule_tasks
-
+    vec = self.events.sort {|a, b| 
+      a.moment <=> b.moment}
+    self.events = vec
   end
 
   def pop_task
-
+    if self.events[0].moment == self.turns
+      poped = self.events.shift()
+    end
+    poped ? true : false
   end
 
   def end_game(win=true)
-
+    self.begun = false
+    self.success = win
   end
 
   def has_a_main
-
+    Games.characters == [] ? false : true
   end
 
 end
@@ -90,11 +113,19 @@ class Rooms < Element
   end
 
   def lock var
-
+    if self.is_locked ^ var
+      self.is_locked = var
+      return true
+    else
+      return false
+    end
   end
 
   def look_around
-    ""
+    look = ""
+    for stuff in self.stuff_there()
+      look << "#{stuff.name} "
+    end
   end
 end
 
@@ -116,19 +147,43 @@ class Thing < Element
   end
 
   def move_stuff(to = self.where)
-    ""
+    if to.is_locked or to == self.where
+      return false
+    else
+      self.where.stuff_there -= [self]
+      self.where = to
+      self.where.stuff_there += [self]
+      return true
+    end
   end
 
   def activate yes
-
+    if self.active ^ yes
+      if self.endure <= 0
+        return false
+      else
+        self.active = yes
+        return false
+      end
+    else
+      return false
+    end
   end
 
   def use
-
+    if self.active
+      self.endure -= 1
+      if self.endure <= 0
+        self.active = false
+      end
+      return true
+    else
+      return false
+    end
   end
 
   def repair rr
-
+    self.endure += rr
   end
 
 end

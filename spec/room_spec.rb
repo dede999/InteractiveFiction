@@ -18,17 +18,32 @@ describe Rooms do
 
   it 'should look around' do
       around = @room.look_around
-      expect(around).to eq("Mesa, Luminária, Cadeira")
+      expect(around).to eq("Mesa Luminária Cadeira ")
   end
 
-  it "should be able to unlock" do
-    @north.lock false
-    expect(@north.is_locked).to be false
+  context "testing unlock" do
+    it "should be able to unlock if its locked" do
+      @north.lock false
+      expect(@north.is_locked).to be false
+    end
+
+    it "should not be able to unlock if its already unlocked" do
+      var = @south.lock false
+      expect(var).to be false
+    end
   end
 
-  it "should be able to lock" do
-    @south.lock true
-    expect(@south.is_locked).to be true
+  context "testing lock" do
+    it "should be able to lock if its unlocked" do
+      @south.lock true
+      expect(@south.is_locked).to be true
+    end
+
+    it "should not be able to lock if its already locked" do
+      @north.is_locked = true
+      var = @north.lock true
+      expect(var).to be false
+    end
   end
 
 end

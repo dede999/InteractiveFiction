@@ -21,6 +21,7 @@ describe Thing do
     @room.south.lock false
     @stuff.move_stuff @room.south
     expect(@stuff.where).to be(@room.south)
+
   end
 
   it "should not be worn if it's inactive" do
@@ -29,6 +30,7 @@ describe Thing do
   end
 
   it "should be worn it it's active" do
+    @stuff.active = true
     var = @stuff.endure
     @stuff.use
     expect(@stuff.endure).to be < var
@@ -59,5 +61,19 @@ describe Thing do
     expect(aft - bef).to be 10
   end
 
+  it "should be able to activate somthing if it's not broken" do
+    @stuff.activate true
+    expect(@stuff.active).to be true
+  end
 
+  it "should not activate somthing it's already active" do
+    var = @stuff.activate true
+    expect(var).to be false
+  end
+
+  it "should not inactivate somthing it's already inactive" do
+    @stuff.active = false
+    var = @stuff.activate false
+    expect(var).to be false
+  end
 end
