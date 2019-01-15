@@ -1,4 +1,6 @@
 module Parser
+  #This module is responsable for parsing
+  # the game file
   OPTIONS = {
       :stack_references => false
   }
@@ -9,7 +11,7 @@ end
 
 module GameParser
 
-  def read
+  def read str
     
   end
 

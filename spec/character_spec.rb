@@ -8,15 +8,17 @@ describe Character do
     @stuff = Thing.new("Piece of Heaven")
     @stuff.where = @bed
     @stuff.quantity = 3
+    @game = Games.new("test", "intro","1")
     @per = Character.new("Dude", @bed)
     @bad = Character.new("Bad Guy", @bed)
-    @game = Games.new("test", "intro","1")
+    @per.story = @game
+    @bad.story = @game
     @per.protagonist = true
     @per.sp = 25
     @bad.sp = 20
   end
 
-  context "making sure none of these things happen if game ain't started" do
+  context "making sure anything happen if game ain't started" do
     it "should not hurt or heal if the game is not started" do
       var = @per.life_up_and_down 5
       expect(var).to be false

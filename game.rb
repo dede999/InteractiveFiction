@@ -27,7 +27,6 @@ class Games < Element
   attr_accessor :events, :turns, :success, :begun,
                 :historic, :characters
   attr_reader :intro, :authors, :version
-  @@characters = []
 
   def initialize(nome, intro, authors="", version)
     @name = nome
@@ -40,31 +39,29 @@ class Games < Element
     @begun = false
     @historic = []
     @meta = Hash.new{}
+    @characters = []
   end
 
-  def characters
-    @@characters
-  end
-
-  def self.characters
-    @@characters
-  end
+  # These methods are no longer needed
+  #   but in case I have a similar trouble
+  #   with class variables in Ruby, I can 
+  #   check how I did it
+  # def characters
+  #   @@characters
+  # end
+  # def self.characters
+  #   @@characters
+  # end
 
   def start
-    var = false
-    for ch in Games.characters do
-      var = ch.protagonist
-      if var
-        break
-      end
+    var = self.has_a_main()
+    if var
+      self.begun = true
+      self.success = false
+      self.historic = []
+      self.turns = 0
     end
-    unless var
-      return var
-    end
-    self.begun = true
-    self.success = false
-    self.historic = []
-    self.turns = 0
+    return var
   end
 
   def new_turn
@@ -91,7 +88,12 @@ class Games < Element
   end
 
   def has_a_main
-    Games.characters == [] ? false : true
+    for ch in self.characters do
+      if ch.protagonist
+        return true
+      end
+    end
+    return false
   end
 
 end
@@ -124,8 +126,10 @@ class Rooms < Element
   def look_around
     look = ""
     for stuff in self.stuff_there()
-      look << "#{stuff.name} "
+      piece = "#{stuff.name} "
+      look << piece
     end
+    look
   end
 end
 
@@ -191,7 +195,7 @@ end
 class Character < Element
   attr_accessor :desc, :short_desc, :attr, :where,
                 :inventory, :protagonist, :hp, :sp,
-                :coins
+                :coins, :story
   attr_reader :name
 
   def initializer(name, where)
@@ -205,30 +209,64 @@ class Character < Element
     @hp = 100
     @sp = 0
     @coins = 0
-    Games.characters << self
+    @story = nil
+    self.story.characters << self
+    # Games.characters << self
   end
 
   # def is_there_any_main
   # end
 
   def life_up_and_down(value, heal=true)
-
+    if self.story.begun
+      if heal
+        self.hp += value
+      else
+        self.hp -= value
+      end
+      return true
+    else
+      false
+    end
   end
 
   def strength_up_and_down(value, heat_up=true)
-
+    if self.story.begun
+      if heat_up
+        self.sp += value
+      else
+        self.sp -= value
+      end
+      return true
+    else
+      false
+    end
   end
 
   def money_up_and_down(value, income=true)
-
+    if self.story.beguS
+    end
   end
 
   def attack(target)
-
+    if self.story.begun
+      if self.sp > target.sp
+        return true
+      else
+        return false
+      end
+    else
+      return false
+    end
   end
 
   def object_in_and_out(thing, get = 1)
-
+    if self.story.begun
+      
+      return true
+    else
+      false
+    end
   end
 end
 
