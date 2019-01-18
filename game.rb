@@ -2,16 +2,16 @@ class Element
   attr_accessor :attr, :flags, :desc, :short
   attr_reader :nome
 
-  def initialize(nome, attr = Hash.new{}, flags = Hash.new{}, desc = "", short = "")
+  def initialize(nome, **kwargs)
     @name = nome
-    @attr = attr
-    @flags = flags
-    @desc = desc
-    @short = short
+    @atrb = Hash.new
+    @flags = Hash.new
+    @desc = kwargs[:desc] ? kwargs[:desc] : ""
+    @short = kwargs[:short] ? kwargs[:short] : ""
   end
 
   def change_variables (var, new_var)
-    self.attr[var] = new_var
+    self.atrb[var] = new_var
   end
 
   def modify flag
@@ -28,11 +28,11 @@ class Games < Element
                 :historic, :characters
   attr_reader :intro, :authors, :version
 
-  def initialize(nome, intro, authors="", version)
+  def initialize(nome, **kw)
     @name = nome
-    @intro = intro
-    @authors = authors.split(",")
-    @version = version
+    @intro = kw[:intro] ? kw[:intro] :  ""
+    @authors = kw[:authors] ? kw[:authors].split(",") : ""
+    @version = kw[:version] ? kw[:version] :  ""
     @turns = 0
     @events = []
     @success = false
@@ -52,6 +52,10 @@ class Games < Element
   # def self.characters
   #   @@characters
   # end
+
+  def authors=(var)
+    @authors = var.split(",")
+  end
 
   def start
     var = self.has_a_main()
@@ -102,16 +106,16 @@ class Rooms < Element
   attr_accessor :name, :north, :east, :west, :south,
                 :flags, :stuff_there, :is_locked
 
-  def initialize (name)
+  def initialize (name, **kw)
     @name = name
-    @desc = ""
+    @desc = kw[:desc] ? kw[:desc] : ""
     @flags = Hash.new{}
-    @north = nil
-    @south = nil
-    @west = nil
-    @east = nil
-    @stuff_there = []
-    @is_locked = false
+    @north = kw[:n] ? kw[:n] : nil
+    @south = kw[:s] ? kw[:s] : nil
+    @west = kw[:w] ? kw[:w] : nil
+    @east = kw[:e] ? kw[:e] : nil
+    @stuff_there = kw[:stuff] ? kw[:stuff] : []
+    @is_locked = kw[:lock] ? kw[:lock] : false
   end
 
   def lock var
@@ -134,20 +138,20 @@ class Rooms < Element
 end
 
 class Thing < Element
-  attr_accessor :where, :desc, :short, :attr, :flags,
+  attr_accessor :where, :desc, :short, :atrb, :flags,
                 :quantity, :endure, :active
   attr_reader :name
 
-  def initialize(nome)
+  def initialize(nome, **kw)
     @name = nome
-    @where = nil
-    @desc = ""
-    @short = ""
-    @attr = Hash.new{}
+    @where = kw[:where] ? kw[:where] : nil
+    @desc = kw[:desc] ? kw[:desc] : ""
+    @short = kw[:short] ? kw[:short] : ""
+    @atrb = Hash.new{}
     @flags = Hash.new{}
-    @quantity = 1
-    @endure = 10 # number of turns 'til it breaks
-    @active = true
+    @quantity = kw[:qtt] ? kw[:qtt] : 1
+    @endure = kw[:endure] ? kw[:endure] : 10 # number of turns 'til it breaks
+    @active = kw[:on] ? kw[:on] : true
   end
 
   def move_stuff(to = self.where)
@@ -193,31 +197,34 @@ class Thing < Element
 end
 
 class Character < Element
-  attr_accessor :desc, :short_desc, :attr, :where,
+  attr_accessor :desc, :short_desc, :atrb, :where,
                 :inventory, :protagonist, :hp, :sp,
                 :coins, :story
   attr_reader :name
 
-  def initializer(name, where)
+  def initializer(name, **kw)
     @name = name
-    @desc = ""
-    @short_desc = ""
-    @attr = Hash.new{}
-    @where = where
-    @inventory = []
-    @protagonist = false
-    @hp = 100
-    @sp = 0
-    @coins = 0
-    @story = nil
-    self.story.characters << self
+    @desc = kw[:desc] ? kw[:desc] : ""
+    @short_desc = kw[:s_desc] ? kw[:s_desc] : ""
+    @atrb = Hash.new{}
+    @where = kw[:where]
+    @inventory = kw[:inventory] ? kw[:inventory] : []
+    @protagonist = kw[:protagonist] ? kw[:protagonist] : false
+    @hp = kw[:hp] ? kw[:hp] : 100
+    @sp = kw[:sp] ? kw[:sp] : 1
+    @coins = kw[:coins] ? kw[:coins] : 30
+    @story = kw[:story] ? kw[:story] : nil
     # Games.characters << self
   end
 
+  def put_in_the_game
+    self.story.characters << self
+  end
   # def is_there_any_main
   # end
 
   def life_up_and_down(value, heal=true)
+    # self.hp = 42
     if self.story.begun
       if heal
         self.hp += value
@@ -244,7 +251,15 @@ class Character < Element
   end
 
   def money_up_and_down(value, income=true)
-    if self.story.beguS
+    if self.story.begun
+      if income
+        self.coins += value
+      else
+        self.coins -= value
+      end
+      return true
+    else
+      false
     end
   end
 
@@ -268,10 +283,15 @@ class Character < Element
       false
     end
   end
+
+  def move to
+    if self.story.begun
+    end
+  end
 end
 
 class Event < Element
-  attr_accessor :moment, :local, :proc, :cond,
+  attr_accessor :moment, :local, :proc, :trigger,
                 :done, :desc, :par, :lamb, :locked
   attr_reader :name
 
@@ -282,7 +302,7 @@ class Event < Element
     @local = Hash.new{} # local variables
     @locked = false
     @moment = -1
-    @cond = ""
+    @trigger = ""
     @done = false
     @lamb = ""
     @proc = nil

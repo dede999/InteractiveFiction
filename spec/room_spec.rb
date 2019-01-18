@@ -7,10 +7,9 @@ describe Rooms do
     t1 = Thing.new("Mesa")
     t2 = Thing.new("Luminária")
     t3 = Thing.new("Cadeira")
-    @room = Rooms.new("Quarto Escuro")
+    @room = Rooms.new("Quarto Escuro", stuff: [t1, t2, t3])
     @north = Rooms.new("Sala")
     @south = Rooms.new("Quintal")
-    @room.stuff_there = [t1, t2, t3]
     @room.north = @north
     @room.south = @south
     @north.is_locked = true

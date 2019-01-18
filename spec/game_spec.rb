@@ -10,13 +10,13 @@ describe Games do
     e1.moment = 4
     e2.moment = 7
     e3.moment = 2
-    @game = Games.new('Zork', '', '')
+    @game = Games.new('Zork')
     @game.turns = 4
     @game.events = [e1, e2, e3]
     @game.begun = false
     @game.historic = ['Be happy']
-    @game.characters << Character.new("Watt", Rooms.new("t1"))
-    @game.characters << Character.new("Lewis", Rooms.new("t2"))
+    @game.characters << Character.new("Watt", where: Rooms.new("t1"))
+    @game.characters << Character.new("Lewis", where: Rooms.new("t2"))
     @game.characters[1].protagonist = true
   end
 
@@ -31,12 +31,12 @@ describe Games do
   end
 
   it "should empty last games prompt history" do
-    @game.start
+    # @game.start
     expect(@game.historic).to eq([])
   end
 
   it "should set the game turns value to zero" do
-    @game.start
+    # @game.start
     expect(@game.turns).to eq 0
   end
 

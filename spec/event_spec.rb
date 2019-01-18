@@ -13,7 +13,6 @@ describe Event do
     @event.local["white"] = 0
     @event.par = 1
     @event.locked = true
-    @event.cond = "lambda {return false}"
   end
 
   context "when testing create_procedure" do
@@ -29,13 +28,6 @@ describe Event do
 
   context "when testing make_it_happen" do
     it "should not execute if its locked" do
-      var = @event.make_it_happen
-      expect(var).to be false
-    end
-
-    it "should not happen if trigger is false" do
-      # activate trigger is a sub call of this method
-      @event.locked = false
       var = @event.make_it_happen
       expect(var).to be false
     end

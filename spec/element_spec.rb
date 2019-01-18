@@ -8,7 +8,7 @@ describe Element do
     att_hash["word"] = "okay"
     flag = {"on" => true }
     @example = Element.new('test')
-    @example.attr = att_hash
+    @example.atrb = att_hash
     @example.flags = flag
   end
 

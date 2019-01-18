@@ -5,11 +5,9 @@ describe Thing do
 
   before(:all) do
     @room = Rooms.new("Living")
-    @room.south = Rooms.new("Bathroom")
-    @room.south.is_locked = true
-    @stuff = Thing.new("Test")
-    @stuff.where = @room
-    @stuff.active = false
+    @room.south = Rooms.new("Bathroom", lock: true)
+    @stuff = Thing.new("Test", where: @room)
+    @stuff.active = false    
   end
 
   it "could not be moved to some locked room" do
@@ -26,7 +24,8 @@ describe Thing do
 
   it "should not be worn if it's inactive" do
     used = @stuff.use
-    expect(used).to be false
+    # expect(used).to be false
+    expect(@stuff.endure).to eq 10
   end
 
   it "should be worn it it's active" do
